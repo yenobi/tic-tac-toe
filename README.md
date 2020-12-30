@@ -4,6 +4,7 @@
 
 Your task is to implement TicTacToe class
 Methods:
+
 - getCurrentPlayerSymbol() should return x or o
 
 - nextTurn(row, col) should properly update class state (change current player, update marks storage etc.)
@@ -17,4 +18,3 @@ Methods:
 - isDraw() should return true if there is no more turns and no winner
 
 - getFieldValue(row, col) should return matrix[row][col] value (if any) or null
-
