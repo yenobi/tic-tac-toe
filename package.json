@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:create": "mocha -r ts-node/register create-game-field.spec.ts",
+    "test:current-player": "mocha -r ts-node/register get-current-player.spec.ts",
     "format": "prettier --write ."
   },
   "repository": {
