@@ -5,7 +5,7 @@
 // data structures (string with calculated shift)
 type X = 'x';
 type O = 'o';
-type EmptyCell = '_';
-type Cell = EmptyCell | X | O;
+export type EmptyCell = '_';
+export type Cell = EmptyCell | X | O;
 export type Row = [Cell, Cell, Cell];
 export type GameField = [Row, Row, Row];
