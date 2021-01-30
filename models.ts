@@ -9,3 +9,4 @@ export type EmptyCell = '_';
 export type Cell = EmptyCell | X | O;
 export type Row = [Cell, Cell, Cell];
 export type GameField = [Row, Row, Row];
+export type MapOfCoordinates = Array<[[number, number], [number, number], [number, number]]>;
