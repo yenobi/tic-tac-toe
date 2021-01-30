@@ -4,10 +4,11 @@
   "description": "Simple tic-tac-toe game with ts",
   "main": "index.js",
   "scripts": {
+    "format": "prettier --write .",
     "test:create": "mocha -r ts-node/register create-game-field.spec.ts",
     "test:current-player": "mocha -r ts-node/register get-current-player.spec.ts",
     "test:next-move-cell": "mocha -r ts-node/register get-next-move-cell.spec.ts",
-    "format": "prettier --write ."
+    "test:utils": "mocha -r ts-node/register utils.spec.ts"
   },
   "repository": {
     "type": "git",
