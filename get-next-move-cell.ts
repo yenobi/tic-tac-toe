@@ -1,32 +1,13 @@
-import { Cell, GameField, O, X } from './models';
-
-type MapOfColumns = [
-  [[number, number], [number, number], [number, number]],
-  [[number, number], [number, number], [number, number]],
-  [[number, number], [number, number], [number, number]],
-];
-
-function getEnemy(currentPlayer: X | O): X | O {
-  return currentPlayer === 'x' ? 'o' : 'x';
-}
-
-function isRowInDanger(row: Cell[], currentPlayer: X | O): boolean {
-  let enemy = getEnemy(currentPlayer);
-  const howManyEnemyCellsInARow = row.filter((cell) => cell === enemy).length;
-
-  return howManyEnemyCellsInARow === 2;
-}
+import { GameField, O, X, MapOfCoordinates } from './models';
+import { getValuesForCoordinates, isAnyEmptyCellIn, isRowInDanger } from './utils';
 
 // todo: add tsdoc instead of comment
 // return answer is [row, cellInARow] with indexes from 0 to 2
 export function getNextMoveCell(currentGameField: GameField, currentPlayer: X | O): [number, number] {
   let emptyCellPointer: [number, number] = null;
 
-  // check if horizontals are in danger
   for (const currentRow of currentGameField) {
-    const isAnyEmptyCellInCurrentRow = currentRow.some((cell) => cell === '_');
-
-    if (!isAnyEmptyCellInCurrentRow) continue;
+    if (!isAnyEmptyCellIn(currentRow)) continue;
 
     const emptyCellInTheCurrentRow: [number, number] = [currentGameField.indexOf(currentRow), currentRow.indexOf('_')];
 
@@ -39,8 +20,7 @@ export function getNextMoveCell(currentGameField: GameField, currentPlayer: X | 
     }
   }
 
-  // check if verticals are in danger
-  const mapOfColumns: MapOfColumns = [
+  const mapOfColumns: MapOfCoordinates = [
     [
       [0, 0],
       [1, 0],
@@ -58,16 +38,39 @@ export function getNextMoveCell(currentGameField: GameField, currentPlayer: X | 
     ],
   ];
   for (const currentCol of mapOfColumns) {
-    const valuesOfCurrentCol = currentCol.map(([rowPointer, cellPointer]) => currentGameField[rowPointer][cellPointer]);
+    const valuesOfCurrentCol = getValuesForCoordinates(currentCol, currentGameField);
 
-    // todo: add fn utril to keep code dry
-    const isAnyEmptyCellInCurrentCol = valuesOfCurrentCol.some((cell) => cell === '_');
-
-    if (!isAnyEmptyCellInCurrentCol) continue;
+    if (!isAnyEmptyCellIn(valuesOfCurrentCol)) continue;
 
     if (isRowInDanger(valuesOfCurrentCol, currentPlayer)) {
       const indexOfEmptyCellInMapOfColumns = valuesOfCurrentCol.indexOf('_');
       return currentCol[indexOfEmptyCellInMapOfColumns];
     }
   }
+
+  const mapOfDiagonals: MapOfCoordinates = [
+    [
+      [0, 0],
+      [1, 1],
+      [2, 2],
+    ],
+    [
+      [0, 2],
+      [1, 1],
+      [2, 0],
+    ],
+  ];
+
+  for (const currentDiagonal of mapOfDiagonals) {
+    const valuesOfCurrentDiagonal = getValuesForCoordinates(currentDiagonal, currentGameField);
+
+    if (!isAnyEmptyCellIn(valuesOfCurrentDiagonal)) continue;
+
+    if (isRowInDanger(valuesOfCurrentDiagonal, currentPlayer)) {
+      const indexOfEmptyCellInMapOfColumns = valuesOfCurrentDiagonal.indexOf('_');
+      return currentDiagonal[indexOfEmptyCellInMapOfColumns];
+    }
+  }
+
+  return emptyCellPointer;
 }
