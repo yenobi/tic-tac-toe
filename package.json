@@ -4,11 +4,14 @@
   "description": "Simple tic-tac-toe game with ts",
   "main": "index.js",
   "scripts": {
+    "play": "ts-node index.ts",
     "format": "prettier --write .",
+    "test": "npm run test:create && npm run test:current-player && npm run test:next-move-cell && npm run test:utils && npm run test:end-game",
     "test:create": "mocha -r ts-node/register create-game-field.spec.ts",
     "test:current-player": "mocha -r ts-node/register get-current-player.spec.ts",
     "test:next-move-cell": "mocha -r ts-node/register get-next-move-cell.spec.ts",
-    "test:utils": "mocha -r ts-node/register utils.spec.ts"
+    "test:utils": "mocha -r ts-node/register utils.spec.ts",
+    "test:end-game": "mocha -r ts-node/register is-end-game.spec.ts"
   },
   "repository": {
     "type": "git",
