@@ -1,4 +1,4 @@
-import { GameField, O, X, MapOfCoordinates } from './models';
+import { GameField, O, X, columnsCoordinates, diagonalsCoordindates } from './models';
 import { getValuesForCoordinates, isAnyEmptyCellIn, isRowInDanger } from './utils';
 
 // todo: add tsdoc instead of comment
@@ -20,24 +20,7 @@ export function getNextMoveCell(currentGameField: GameField, currentPlayer: X | 
     }
   }
 
-  const mapOfColumns: MapOfCoordinates = [
-    [
-      [0, 0],
-      [1, 0],
-      [2, 0],
-    ],
-    [
-      [0, 1],
-      [1, 1],
-      [2, 1],
-    ],
-    [
-      [0, 2],
-      [1, 2],
-      [2, 2],
-    ],
-  ];
-  for (const currentCol of mapOfColumns) {
+  for (const currentCol of columnsCoordinates) {
     const valuesOfCurrentCol = getValuesForCoordinates(currentCol, currentGameField);
 
     if (!isAnyEmptyCellIn(valuesOfCurrentCol)) continue;
@@ -48,20 +31,7 @@ export function getNextMoveCell(currentGameField: GameField, currentPlayer: X | 
     }
   }
 
-  const mapOfDiagonals: MapOfCoordinates = [
-    [
-      [0, 0],
-      [1, 1],
-      [2, 2],
-    ],
-    [
-      [0, 2],
-      [1, 1],
-      [2, 0],
-    ],
-  ];
-
-  for (const currentDiagonal of mapOfDiagonals) {
+  for (const currentDiagonal of diagonalsCoordindates) {
     const valuesOfCurrentDiagonal = getValuesForCoordinates(currentDiagonal, currentGameField);
 
     if (!isAnyEmptyCellIn(valuesOfCurrentDiagonal)) continue;
