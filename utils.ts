@@ -8,7 +8,7 @@ export function isAnyEmptyCellIn(currentRow: Cell[]): boolean {
   return currentRow.some((cell) => cell === '_');
 }
 
-function getEnemy(currentPlayer: X | O): X | O {
+export function getEnemy(currentPlayer: X | O): X | O {
   return currentPlayer === 'x' ? 'o' : 'x';
 }
 
