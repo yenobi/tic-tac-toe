@@ -1,23 +1,25 @@
-export function runGame(): GameField {}
-// function runGame(field: GameField): GameField {
-//   const currentField = createGameField();
-// // fill in to prevent win of the opposite
-// // random move
-//   return updatedField;
-// }
+import { createGameField } from './create-game-field';
+import { isEndGame } from './is-end-game';
+import { O, X } from './models';
+import { makeMove } from './make-move';
+import { getEnemy } from './utils';
 
-// runGame()
-// 1. with empty field
-// - create field
-// - toss a coin for the first player
-// - make move
-// - side effect logging every move -> additional flag
-// - log the result
+export function runGame() {
+  const gameField = createGameField();
+  // will be some randomazier
+  let currentPlayer: X | O = 'x';
 
+  let isEndOfCurrentGame = false;
+  let field = gameField;
+  do {
+    field = makeMove(field, currentPlayer);
+    // todo: add enable logger flag for each move
+    // console.log('--------- new move:')
+    // console.log(field)
+    isEndOfCurrentGame = isEndGame(field, currentPlayer);
+    currentPlayer = getEnemy(currentPlayer);
+  } while (!isEndOfCurrentGame);
 
-// 2. with given field
-// - create field from the input
-// - getTheCurrentPlayer
-// - make a move
-// - side effect logging -> additional flag
-// - log the result
+  // { winner: x | o | null, gameField: '' }
+  return field;
+}
