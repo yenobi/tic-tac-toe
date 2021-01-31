@@ -1,5 +1,25 @@
 # Tic-tac-toe game
 
+## todo:
+- unit test for run game
+- project structure
+- docs in readme file
+- migrate to string model in separate branch to compare
+- cli tool to run the game?
+- better strategies
+-> first move to center
+-> if possibility to win
+## Description
+
+- what is this repo about
+
+## Check it yourself
+
+- the instructions how to run the code
+
+1. Pull the repository
+2. Check the input game field
+
 ## Copy-pasted description
 
 Your task is to implement TicTacToe class
